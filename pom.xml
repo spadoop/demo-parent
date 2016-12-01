@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.2.RELEASE</version>
+    </parent>
+    
+	<groupId>com.ocs.microserver.parent</groupId>
+	<artifactId>demo-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>OCS微服务开发项目</name>
+
+	<properties>
+		<springboot.version>1.4.2.RELEASE</springboot.version>
+		<jsonpath.version>2.2.0</jsonpath.version>
+	</properties>
+
+	<!-- 为本项目配置私服，为本机项目配置私服，可参考setting.xml-->
+	<repositories>
+		<repository>
+			<id>ocs-nexus</id>
+			<name>OCS Nexus Repository</name>
+			<url>http://192.168.1.253:8081/repository/maven-central/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+		<!--
+		<repository>
+			<id>ocs-nexus-snapshot</id>
+			<name>OCS Nexus Repository Snapshot</name>
+			<url>http://192.168.1.253:8081/repository/maven-snapshots/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+		-->
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>ocs-nexus</id>
+			<name>OCS Nexus Repository</name>
+			<url>http://192.168.1.253:8081/repository/maven-central/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+
+	<!-- 发布构件到Nexus -->
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<name>Nexus Releases Repository</name>
+			<url>http://192.168.1.253:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>Nexus Snapshots Repository</name>
+			<url>http://192.168.1.253:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-starter-web</artifactId>
+		        <version>${springboot.version}</version>
+		    </dependency>
+		    <dependency>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-starter-test</artifactId>
+		        <version>${springboot.version}</version>
+		        <scope>test</scope>
+		    </dependency>
+		    <dependency>
+		        <groupId>com.jayway.jsonpath</groupId>
+		        <artifactId>json-path</artifactId>
+		        <version>${jsonpath.version}</version>
+		        <scope>test</scope>
+		    </dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.1.1</version>
+					<executions>
+						<execution>
+							<id>attach-source</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				-->
+				<plugin>
+					<!-- 配置compiler插件支持1.8，默认应该支持1.5 -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	<!-- 
+	<modules>
+		<module>../passport</module>
+		<module>../shopping</module>
+		<module>../core</module>
+		<module>../order</module>
+	</modules>
+	-->
+</project>
