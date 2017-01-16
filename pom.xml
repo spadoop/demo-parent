@@ -10,41 +10,34 @@
         <version>1.4.2.RELEASE</version>
     </parent>
     
-	<groupId>com.ocs.microserver.parent</groupId>
+	<groupId>com.lysky.microserver.parent</groupId>
 	<artifactId>demo-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>OCS微服务开发项目</name>
+	<name>微服务开发项目</name>
 
 	<properties>
 		<springboot.version>1.4.2.RELEASE</springboot.version>
 		<jsonpath.version>2.2.0</jsonpath.version>
+		<mysql.version>5.1.21</mysql.version>
+		<mybatis-spring-boot.version>1.1.1</mybatis-spring-boot.version>
 	</properties>
 
 	<!-- 为本项目配置私服，为本机项目配置私服，可参考setting.xml-->
 	<repositories>
 		<repository>
-			<id>ocs-nexus</id>
-			<name>OCS Nexus Repository</name>
+			<id>lysky-nexus</id>
+			<name>lysky Nexus Repository</name>
 			<url>http://192.168.1.253:8081/repository/maven-central/</url>
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
-		<!--
-		<repository>
-			<id>ocs-nexus-snapshot</id>
-			<name>OCS Nexus Repository Snapshot</name>
-			<url>http://192.168.1.253:8081/repository/maven-snapshots/</url>
-			<releases><enabled>true</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</repository>
-		-->
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>ocs-nexus</id>
-			<name>OCS Nexus Repository</name>
+			<id>lysky-nexus</id>
+			<name>lysky Nexus Repository</name>
 			<url>http://192.168.1.253:8081/repository/maven-central/</url>
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
@@ -85,28 +78,22 @@
 		        <version>${jsonpath.version}</version>
 		        <scope>test</scope>
 		    </dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis-spring-boot.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!--
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.1.1</version>
-					<executions>
-						<execution>
-							<id>attach-source</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				-->
 				<plugin>
 					<!-- 配置compiler插件支持1.8，默认应该支持1.5 -->
 					<groupId>org.apache.maven.plugins</groupId>
